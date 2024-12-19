@@ -3,7 +3,7 @@ import sqlite3
 
 def checkTime():
     
-    conn = sqlite3.connect('zeitsteuerung.db')
+    conn = sqlite3.connect('/home/amweb/zeitsteuerung.db')
     cursor = conn.cursor()
     
     sql = '''SELECT *

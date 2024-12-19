@@ -6,7 +6,7 @@ import json
 import time
 from datetime import datetime
 import threading
-
+from check_db import checkTime
 import fritz_script
 
 logging.basicConfig(filename='webhook.log',format='%(asctime)s - %(levelname)s - %(message)s', level=logging.INFO)
@@ -42,12 +42,13 @@ def webhook():
 def monitorTime():
     
     global schedule_active
-    current_time = datetime.now()
+    #current_time = datetime.now()
     
-    with open('/home/amweb/dutyTime.json') as f:
-        times = json.load(f)
-    schedule = times['times']
-    schedule_active = any(is_time_in_range(entry["on"], entry["off"], current_time) for entry in schedule)
+    #with open('/home/amweb/dutyTime.json') as f:
+    #    times = json.load(f)
+    #schedule = times['times']
+    #schedule_active = any(is_time_in_range(entry["on"], entry["off"], current_time) for entry in schedule)
+    schedule_active = checkTime()
     update_monitor()
         
 def is_time_in_range(start, end, current_time):

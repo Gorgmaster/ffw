@@ -1,5 +1,4 @@
 import sqlite3
-import pandas as pd
 import streamlit as st
 from datetime import datetime, timedelta
 
@@ -20,10 +19,15 @@ def addTime(day, an, aus):
 def getEntries():
     
     conn = sqlite3.connect('zeitsteuerung.db')
+    cursor = conn.cursor()
+    
     query = "SELECT * FROM zeitsteuerung"
-    df = pd.read_sql(query, conn)
+    cursor.execute(query)
+    result = cursor.fetchall()
     conn.close()
-    return df
+    data = [{'An Zeit': row[0], 'Aus Zeit': row[1]} for row in result]
+    
+    return data
     
     
 
@@ -52,14 +56,15 @@ if button_click:
     addTime(day, an, aus)
     
 
-st.header("Daten aus der Tabelle 'zeitsteuerung'")
+#st.header("Daten aus der Tabelle 'zeitsteuerung'")
     
 # Daten aus der Datenbank abfragen
-df = getEntries()
+#data = getEntries()
 
+#st.write(len(data))
 # Überprüfen, ob Daten vorhanden sind
-if not df.empty:
+#if len(data)>0:
     # Zeige die Daten als Tabelle an
-    st.dataframe(df)
-else:
-    st.write("Keine Daten in der Tabelle vorhanden.")
+#    st.table(data)
+#else:
+#    st.write("Keine Daten in der Tabelle vorhanden.")
