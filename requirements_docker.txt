@@ -1,0 +1,5 @@
+pyarrow==5.0.0
+pandas==2.2.3
+numpy==2.0.2
+tornado==6.4.2
+streamlit==1.41.1

@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  monitor:
+    build: .
+    container_name: monitorZeiten
+    command: streamlit run monitorzeiten.py --server.port 8501
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/code
+    working_dir: /code
+    stdin_open: true
+    tty: true
